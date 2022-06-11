@@ -2,8 +2,6 @@ const user =require('../modal/user.modal')
 
 exports.getUser=async(req,res,next)=>{
 
-    console.log("-")
-
     try {
 
         const users=await user.find()
@@ -60,9 +58,9 @@ exports.putUser=async(req,res,next)=>{
 
     try {
 
-        await user.update({_id:id},{$set:{firstName:firstName,lastName:lastName,age:age}})
+        const data=await user.findOneAndUpdate({_id:id},{$set:{firstName:firstName,lastName:lastName,age:age}})
 
-        console.log(data)
+
 
 
         if(data){
@@ -90,7 +88,7 @@ exports.deleteUser=async(req,res,next)=>{
 
         const data=await user.findByIdAndDelete(id)
 
-        console.log(data)
+  
 
         next()
         
